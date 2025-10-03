@@ -1,5 +1,7 @@
 # Esercizio: database studenti
 
+**Nota:** Questo esercizio deve essere svolto utilizzando Python e il modulo `sqlite3` per interagire con il database SQLite. Consulta l'esempio di codice al seguente link per iniziare: [https://github.com/angelogalantiscuola/IT/blob/main/03_Sviluppo_Web_e_Database/01_Database/12_SQL_in_Python.md](https://github.com/angelogalantiscuola/IT/blob/main/03_Sviluppo_Web_e_Database/01_Database/12_SQL_in_Python.md)
+
 - Crea un database SQLite chiamato "scuola.db".
 - Crea due tabelle:
   - Studenti: Matricola (INTEGER PRIMARY KEY), Nome (TEXT NOT NULL), Cognome (TEXT NOT NULL).
