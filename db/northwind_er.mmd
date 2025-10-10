@@ -1,0 +1,128 @@
+erDiagram
+    Categories {
+        INTEGER CategoryID PK
+        TEXT CategoryName
+        TEXT Description
+        BLOB Picture
+    }
+    CustomerCustomerDemo {
+        TEXT CustomerID PK,FK
+        TEXT CustomerTypeID PK,FK
+    }
+    CustomerDemographics {
+        TEXT CustomerTypeID PK
+        TEXT CustomerDesc
+    }
+    Customers {
+        TEXT CustomerID PK
+        TEXT CompanyName
+        TEXT ContactName
+        TEXT ContactTitle
+        TEXT Address
+        TEXT City
+        TEXT Region
+        TEXT PostalCode
+        TEXT Country
+        TEXT Phone
+        TEXT Fax
+    }
+    Employees {
+        INTEGER EmployeeID PK
+        TEXT LastName
+        TEXT FirstName
+        TEXT Title
+        TEXT TitleOfCourtesy
+        DATE BirthDate
+        DATE HireDate
+        TEXT Address
+        TEXT City
+        TEXT Region
+        TEXT PostalCode
+        TEXT Country
+        TEXT HomePhone
+        TEXT Extension
+        BLOB Photo
+        TEXT Notes
+        INTEGER ReportsTo FK
+        TEXT PhotoPath
+    }
+    EmployeeTerritories {
+        INTEGER EmployeeID PK,FK
+        TEXT TerritoryID PK,FK
+    }
+    "Order Details" {
+        INTEGER OrderID PK,FK
+        INTEGER ProductID PK,FK
+        NUMERIC UnitPrice
+        INTEGER Quantity
+        REAL Discount
+    }
+    Orders {
+        INTEGER OrderID PK
+        TEXT CustomerID FK
+        INTEGER EmployeeID FK
+        DATETIME OrderDate
+        DATETIME RequiredDate
+        DATETIME ShippedDate
+        INTEGER ShipVia FK
+        NUMERIC Freight
+        TEXT ShipName
+        TEXT ShipAddress
+        TEXT ShipCity
+        TEXT ShipRegion
+        TEXT ShipPostalCode
+        TEXT ShipCountry
+    }
+    Products {
+        INTEGER ProductID PK
+        TEXT ProductName
+        INTEGER SupplierID FK
+        INTEGER CategoryID FK
+        TEXT QuantityPerUnit
+        NUMERIC UnitPrice
+        INTEGER UnitsInStock
+        INTEGER UnitsOnOrder
+        INTEGER ReorderLevel
+        TEXT Discontinued
+    }
+    Regions {
+        INTEGER RegionID PK
+        TEXT RegionDescription
+    }
+    Shippers {
+        INTEGER ShipperID PK
+        TEXT CompanyName
+        TEXT Phone
+    }
+    Suppliers {
+        INTEGER SupplierID PK
+        TEXT CompanyName
+        TEXT ContactName
+        TEXT ContactTitle
+        TEXT Address
+        TEXT City
+        TEXT Region
+        TEXT PostalCode
+        TEXT Country
+        TEXT Phone
+        TEXT Fax
+        TEXT HomePage
+    }
+    Territories {
+        TEXT TerritoryID PK
+        TEXT TerritoryDescription
+        INTEGER RegionID FK
+    }
+    Categories ||--o{ Products : "categorizes"
+    Customers ||--o{ Orders : "places"
+    Customers ||--o{ CustomerCustomerDemo : "has"
+    CustomerDemographics ||--o{ CustomerCustomerDemo : "type"
+    Employees ||--o{ Employees : "reports to"
+    Employees ||--o{ EmployeeTerritories : "assigned to"
+    Employees ||--o{ Orders : "handles"
+    "Order Details" }o--|| Orders : "part of"
+    "Order Details" }o--|| Products : "ordered"
+    Orders }o--|| Shippers : "shipped by"
+    Products }o--|| Suppliers : "supplied by"
+    Regions ||--o{ Territories : "contains"
+    Territories ||--o{ EmployeeTerritories : "assigned"

@@ -1,0 +1,13 @@
+erDiagram
+    Studenti {
+        INTEGER Matricola PK
+        TEXT Nome
+        TEXT Cognome
+    }
+    Esami {
+        INTEGER Id PK
+        INTEGER Matricola FK
+        TEXT Corso
+        INTEGER Voto
+    }
+    Studenti ||--o{ Esami : "sostiene"

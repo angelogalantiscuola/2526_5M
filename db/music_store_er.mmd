@@ -1,0 +1,98 @@
+erDiagram
+    artists {
+        INTEGER id PK
+        VARCHAR name
+    }
+    albums {
+        INTEGER id PK
+        VARCHAR title
+        INTEGER artist_id FK
+    }
+    employees {
+        INTEGER id PK
+        VARCHAR last_name
+        VARCHAR first_name
+        VARCHAR title
+        INTEGER reports_to FK
+        TIMESTAMP birth_date
+        TIMESTAMP hire_date
+        VARCHAR address
+        VARCHAR city
+        VARCHAR state
+        VARCHAR country
+        VARCHAR postal_code
+        VARCHAR phone
+        VARCHAR fax
+        VARCHAR email
+    }
+    customers {
+        INTEGER id PK
+        VARCHAR first_name
+        VARCHAR last_name
+        VARCHAR company
+        VARCHAR address
+        VARCHAR city
+        VARCHAR state
+        VARCHAR country
+        VARCHAR postal_code
+        VARCHAR phone
+        VARCHAR fax
+        VARCHAR email
+        INTEGER support_rep_id FK
+    }
+    genres {
+        INTEGER id PK
+        VARCHAR name
+    }
+    invoices {
+        INTEGER id PK
+        INTEGER customer_id FK
+        TIMESTAMP invoice_date
+        VARCHAR billing_address
+        VARCHAR billing_city
+        VARCHAR billing_state
+        VARCHAR billing_country
+        VARCHAR billing_postal_code
+        NUMERIC total
+    }
+    media_types {
+        INTEGER id PK
+        VARCHAR name
+    }
+    tracks {
+        INTEGER id PK
+        VARCHAR name
+        INTEGER album_id FK
+        INTEGER media_type_id FK
+        INTEGER genre_id FK
+        VARCHAR composer
+        INTEGER milliseconds
+        INTEGER bytes
+        NUMERIC unit_price
+    }
+    invoice_lines {
+        INTEGER id PK
+        INTEGER invoice_id FK
+        INTEGER track_id FK
+        NUMERIC unit_price
+        INTEGER quantity
+    }
+    playlists {
+        INTEGER id PK
+        VARCHAR name
+    }
+    playlist_tracks {
+        INTEGER playlist_id PK,FK
+        INTEGER track_id PK,FK
+    }
+    artists ||--o{ albums : "has"
+    albums ||--o{ tracks : "contains"
+    employees ||--o{ employees : "reports to"
+    employees ||--o{ customers : "supports"
+    customers ||--o{ invoices : "places"
+    invoices ||--|{ invoice_lines : "has"
+    invoice_lines }o--|| tracks : "for"
+    tracks }o--|| genres : "belongs to"
+    tracks }o--|| media_types : "type"
+    playlists ||--o{ playlist_tracks : "has"
+    playlist_tracks }o--|| tracks : "includes"
