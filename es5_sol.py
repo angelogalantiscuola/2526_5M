@@ -101,9 +101,9 @@ def query_libri_per_genere() -> List[Tuple[str, int]]:
 def query_autori_con_piu_libri() -> List[Tuple[str, str, int]]:
     """Restituisce gli autori ordinati per numero di libri (usa JOIN, GROUP BY, ORDER BY)."""
     cursor.execute("""
-        SELECT Autori.nome, Autori.cognome, COUNT(Libri.id) AS num_libri
+        SELECT Autori.nome, Autori.cognome, COUNT(*) AS num_libri
         FROM Autori
-        LEFT JOIN Libri ON Autori.id = Libri.autore_id
+        JOIN Libri ON Autori.id = Libri.autore_id
         GROUP BY Autori.id
         ORDER BY num_libri DESC
     """)

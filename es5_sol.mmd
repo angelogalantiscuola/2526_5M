@@ -1,0 +1,25 @@
+erDiagram
+    Autori ||--o{ Libri : "ha scritto"
+    Libri ||--o{ Prestiti : "prestato"
+
+    Autori {
+        INTEGER id PK
+        TEXT nome
+        TEXT cognome
+    }
+
+    Libri {
+        INTEGER id PK
+        TEXT titolo
+        INTEGER autore_id FK
+        INTEGER anno
+        TEXT genere
+    }
+
+    Prestiti {
+        INTEGER id PK
+        INTEGER libro_id FK
+        TEXT utente
+        TEXT data_prestito
+        TEXT data_restituzione
+    }
