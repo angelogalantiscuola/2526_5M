@@ -40,7 +40,6 @@ try:
         (101, "Fisica", 27),
         (102, "Matematica", 28),
         (102, "Informatica", 30),
-        (102, "Fisica", 27),
     ]
     cursor.executemany("INSERT INTO Esami (Matricola, Corso, Voto) VALUES (?, ?, ?)", esami)
 
@@ -53,6 +52,13 @@ try:
     print("1) Elenco di tutti gli studenti:")
     cursor.execute("SELECT Matricola, Nome, Cognome FROM Studenti")
     studenti: List[Tuple[int, str, str]] = cursor.fetchall()
+
+    print("2) dati di uno studente specifico (matricola 101):")
+    cursor.execute("SELECT Matricola, Nome, Cognome FROM Studenti WHERE Matricola = ?", (101,))
+    studente_specifico: Tuple[int, str, str] = cursor.fetchone()
+    print(f"Matricola: {studente_specifico[0]}, Nome: {studente_specifico[1]}, Cognome: {studente_specifico[2]}\n")
+
+
     for studente in studenti:
         print(f"Matricola: {studente[0]}, Nome: {studente[1]}, Cognome: {studente[2]}")
     print()
