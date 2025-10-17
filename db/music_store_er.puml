@@ -1,0 +1,121 @@
+@startuml ER Diagram Music Store
+entity artists {
+  * id : INTEGER
+  --
+  name : VARCHAR
+}
+
+entity albums {
+  * id : INTEGER
+  --
+  title : VARCHAR
+  artist_id : INTEGER
+}
+
+entity employees {
+  * id : INTEGER
+  --
+  last_name : VARCHAR
+  first_name : VARCHAR
+  title : VARCHAR
+  reports_to : INTEGER
+  birth_date : TIMESTAMP
+  hire_date : TIMESTAMP
+  address : VARCHAR
+  city : VARCHAR
+  state : VARCHAR
+  country : VARCHAR
+  postal_code : VARCHAR
+  phone : VARCHAR
+  fax : VARCHAR
+  email : VARCHAR
+}
+
+entity customers {
+  * id : INTEGER
+  --
+  first_name : VARCHAR
+  last_name : VARCHAR
+  company : VARCHAR
+  address : VARCHAR
+  city : VARCHAR
+  state : VARCHAR
+  country : VARCHAR
+  postal_code : VARCHAR
+  phone : VARCHAR
+  fax : VARCHAR
+  email : VARCHAR
+  support_rep_id : INTEGER
+}
+
+entity genres {
+  * id : INTEGER
+  --
+  name : VARCHAR
+}
+
+entity invoices {
+  * id : INTEGER
+  --
+  customer_id : INTEGER
+  invoice_date : TIMESTAMP
+  billing_address : VARCHAR
+  billing_city : VARCHAR
+  billing_state : VARCHAR
+  billing_country : VARCHAR
+  billing_postal_code : VARCHAR
+  total : NUMERIC
+}
+
+entity media_types {
+  * id : INTEGER
+  --
+  name : VARCHAR
+}
+
+entity tracks {
+  * id : INTEGER
+  --
+  name : VARCHAR
+  album_id : INTEGER
+  media_type_id : INTEGER
+  genre_id : INTEGER
+  composer : VARCHAR
+  milliseconds : INTEGER
+  bytes : INTEGER
+  unit_price : NUMERIC
+}
+
+entity invoice_lines {
+  * id : INTEGER
+  --
+  invoice_id : INTEGER
+  track_id : INTEGER
+  unit_price : NUMERIC
+  quantity : INTEGER
+}
+
+entity playlists {
+  * id : INTEGER
+  --
+  name : VARCHAR
+}
+
+entity playlist_tracks {
+  * playlist_id : INTEGER
+  * track_id : INTEGER
+  --
+}
+
+artists ||--o{ albums : "has"
+albums ||--o{ tracks : "contains"
+employees ||--o{ employees : "reports to"
+employees ||--o{ customers : "supports"
+customers ||--o{ invoices : "places"
+invoices ||--|{ invoice_lines : "has"
+invoice_lines }o--|| tracks : "for"
+tracks }o--|| genres : "belongs to"
+tracks }o--|| media_types : "type"
+playlists ||--o{ playlist_tracks : "has"
+playlist_tracks }o--|| tracks : "includes"
+@enduml

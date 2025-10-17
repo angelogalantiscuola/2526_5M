@@ -1,0 +1,160 @@
+@startuml northwind_er
+' Northwind ER converted from northwind_er.mmd (Mermaid)
+' Generated: 2025-10-16
+hide circle
+skinparam linetype ortho
+
+entity Categories {
+  * CategoryID : INTEGER
+  --
+    CategoryName : TEXT
+    Description : TEXT
+    Picture : BLOB
+}
+
+entity CustomerCustomerDemo {
+  * CustomerID : TEXT
+  * CustomerTypeID : TEXT
+}
+
+entity CustomerDemographics {
+  * CustomerTypeID : TEXT
+  --
+    CustomerDesc : TEXT
+}
+
+entity Customers {
+  * CustomerID : TEXT
+  --
+    CompanyName : TEXT
+    ContactName : TEXT
+    ContactTitle : TEXT
+    Address : TEXT
+    City : TEXT
+    Region : TEXT
+    PostalCode : TEXT
+    Country : TEXT
+    Phone : TEXT
+    Fax : TEXT
+}
+
+entity Employees {
+  * EmployeeID : INTEGER
+  --
+    LastName : TEXT
+    FirstName : TEXT
+    Title : TEXT
+    TitleOfCourtesy : TEXT
+    BirthDate : DATE
+    HireDate : DATE
+    Address : TEXT
+    City : TEXT
+    Region : TEXT
+    PostalCode : TEXT
+    Country : TEXT
+    HomePhone : TEXT
+    Extension : TEXT
+    Photo : BLOB
+    Notes : TEXT
+    ReportsTo : INTEGER
+    PhotoPath : TEXT
+}
+
+entity EmployeeTerritories {
+  * EmployeeID : INTEGER
+  * TerritoryID : TEXT
+}
+
+entity "Order Details" as OrderDetails {
+  * OrderID : INTEGER
+  * ProductID : INTEGER
+  --
+    UnitPrice : NUMERIC
+    Quantity : INTEGER
+    Discount : REAL
+}
+
+entity Orders {
+  * OrderID : INTEGER
+  --
+    CustomerID : TEXT
+    EmployeeID : INTEGER
+    OrderDate : DATETIME
+    RequiredDate : DATETIME
+    ShippedDate : DATETIME
+    ShipVia : INTEGER
+    Freight : NUMERIC
+    ShipName : TEXT
+    ShipAddress : TEXT
+    ShipCity : TEXT
+    ShipRegion : TEXT
+    ShipPostalCode : TEXT
+    ShipCountry : TEXT
+}
+
+entity Products {
+  * ProductID : INTEGER
+  --
+    ProductName : TEXT
+    SupplierID : INTEGER
+    CategoryID : INTEGER
+    QuantityPerUnit : TEXT
+    UnitPrice : NUMERIC
+    UnitsInStock : INTEGER
+    UnitsOnOrder : INTEGER
+    ReorderLevel : INTEGER
+    Discontinued : TEXT
+}
+
+entity Regions {
+  * RegionID : INTEGER
+  --
+    RegionDescription : TEXT
+}
+
+entity Shippers {
+  * ShipperID : INTEGER
+  --
+    CompanyName : TEXT
+    Phone : TEXT
+}
+
+entity Suppliers {
+  * SupplierID : INTEGER
+  --
+    CompanyName : TEXT
+    ContactName : TEXT
+    ContactTitle : TEXT
+    Address : TEXT
+    City : TEXT
+    Region : TEXT
+    PostalCode : TEXT
+    Country : TEXT
+    Phone : TEXT
+    Fax : TEXT
+    HomePage : TEXT
+}
+
+entity Territories {
+  * TerritoryID : TEXT
+  --
+    TerritoryDescription : TEXT
+    RegionID : INTEGER
+}
+
+' Relationships
+Categories ||--o{ Products : "categorizes"
+Customers ||--o{ Orders : "places"
+Customers ||--o{ CustomerCustomerDemo : "has"
+CustomerDemographics ||--o{ CustomerCustomerDemo : "type"
+Employees ||--o{ Employees : "reports to"
+Employees ||--o{ EmployeeTerritories : "assigned to"
+Employees ||--o{ Orders : "handles"
+OrderDetails }o--|| Orders : "part of"
+OrderDetails }o--|| Products : "ordered"
+Orders }o--|| Shippers : "shipped by"
+Products }o--|| Suppliers : "supplied by"
+Regions ||--o{ Territories : "contains"
+Territories ||--o{ EmployeeTerritories : "assigned"
+
+@enduml
