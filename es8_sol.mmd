@@ -9,7 +9,6 @@ erDiagram
         INTEGER scontrino_id FK
         INTEGER album_id FK
         INTEGER quantita
-        REAL prezzo_unitario
     }
 
     %% Scontrino }o--o{ AlbumVirtuale : "puo essere venduto in"
@@ -37,7 +36,7 @@ erDiagram
         INTEGER codice PK
         TEXT titolo
         REAL prezzo
-        INTEGER quantita
+        REAL prezzo_unitario
         INTEGER artista_id FK
     }
 
