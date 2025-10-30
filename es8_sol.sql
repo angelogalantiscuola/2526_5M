@@ -1,3 +1,4 @@
+-- database: :memory:
 -- Creazione tabelle
 
 CREATE TABLE Negozi (
@@ -122,3 +123,54 @@ INSERT INTO RigheScontrino (id, scontrino_id, album_id, quantita) VALUES
 (14, 9, 12, 1),
 (15, 10, 1, 1),
 (16, 10, 9, 2);
+
+-- QUERY 1: Selezione semplice
+-- Recuperare tutti gli album di Vasco Rossi ordinati per prezzo
+SELECT AV.titolo, AV.prezzo
+FROM AlbumVirtuale AV
+JOIN Artisti A ON AV.artista_id = A.id
+WHERE A.nome = 'Vasco' AND A.cognome = 'Rossi'
+ORDER BY AV.prezzo;
+
+-- QUERY 2: Join semplice
+-- Elencare tutti gli album con il nome e cognome dell'artista
+SELECT AV.titolo, A.nome, A.cognome
+FROM AlbumVirtuale AV
+JOIN Artisti A ON AV.artista_id = A.id;
+
+-- QUERY 3: Aggregazione con GROUP BY
+-- Contare il numero di album per ogni artista e il prezzo medio
+SELECT A.nome, A.cognome, COUNT(RS.id) AS numero_album, AVG(AV.prezzo) AS prezzo_medio
+FROM AlbumVirtuale AV
+JOIN Artisti A ON AV.artista_id = A.id
+JOIN RigheScontrino RS ON AV.codice = RS.album_id
+GROUP BY A.id;
+
+-- QUERY 4: Query annidata (subquery)
+-- Trovare tutti gli album il cui prezzo è superiore alla media dei prezzi degli album di tutti gli artisti
+SELECT AV.titolo, AV.prezzo
+FROM AlbumVirtuale AV
+JOIN Artisti A ON AV.artista_id = A.id
+WHERE AV.prezzo > (SELECT AVG(prezzo) FROM AlbumVirtuale);
+
+-- QUERY 5: Join con aggregazione
+-- Calcolare il totale delle vendite per ogni artista
+SELECT A.nome, A.cognome, SUM(RS.quantita * AV.prezzo_unitario) AS totale_vendite
+FROM RigheScontrino RS
+JOIN AlbumVirtuale AV ON RS.album_id = AV.codice
+JOIN Artisti A ON AV.artista_id = A.id
+GROUP BY A.id;
+
+-- QUERY 6: Query con wildcards (LIKE)
+-- Trovare album con 'a' nel titolo
+SELECT *
+FROM AlbumVirtuale
+WHERE titolo LIKE '%a%';
+
+-- QUERY 7: LEFT JOIN con aggregazione
+-- Elencare tutti gli artisti e il numero di album venduti (incluso 0 se non hanno vendite)
+SELECT A.nome, A.cognome, COUNT(RS.id) AS numero_album_venduti
+FROM Artisti A
+LEFT JOIN AlbumVirtuale AV ON A.id = AV.artista_id
+LEFT JOIN RigheScontrino RS ON AV.codice = RS.album_id 
+GROUP BY A.id;

@@ -1,0 +1,50 @@
+erDiagram
+    Azienda {
+        string PartitaIVA PK
+        string Nome
+        string Via
+        string NumeroCivico
+        string Comune
+        string Provincia
+        string Regione
+    }
+
+    Vigneto {
+        string Codice PK
+        string Nome
+        float SuperficieTotale
+        string Localita
+        string Comune
+        string ClasseEsposizione
+        int NumeroFilari
+        string PartitaIVA FK
+    }
+
+    Blocco {
+        string Codice PK
+        float Superficie
+        string ClasseEsposizione
+        string CodiceVigneto FK
+    }
+
+    Vitigno {
+        string NomeScientifico PK
+        string NomeComune
+        string ColoreBacca
+        string OrigineGenetica
+    }
+
+    Etichetta {
+        string Nome PK
+        int Annata PK
+        string Tipologia
+        string PartitaIVA FK
+        string CodiceVigneto FK
+        string NomeScientifico FK
+    }
+
+    Azienda ||--o{ Vigneto : possiede
+    Vigneto ||--o{ Blocco : suddiviso_in
+    Blocco }o--o{ Vitigno : ha
+    Vitigno ||--o{ Etichetta : vitigno_prevalente
+    Azienda ||--o{ Etichetta : produce
