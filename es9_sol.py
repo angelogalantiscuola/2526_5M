@@ -1,7 +1,8 @@
 import requests
+from typing import Optional
 
 
-def get_posts_by_user(user_id):
+def get_posts_by_user(user_id: int) -> Optional[list]:
     """Recupera tutti i post pubblicati dall'utente con l'ID specificato."""
     try:
         response = requests.get(
@@ -14,7 +15,7 @@ def get_posts_by_user(user_id):
         return None
 
 
-def get_comments_for_post(post_id):
+def get_comments_for_post(post_id: int) -> Optional[list]:
     """Recupera i commenti per un post specifico."""
     try:
         response = requests.get(
@@ -27,7 +28,7 @@ def get_comments_for_post(post_id):
         return None
 
 
-def create_comment(post_id, name, email, body):
+def create_comment(post_id: int, name: str, email: str, body: str) -> Optional[dict]:
     """Crea un nuovo commento per un post specifico."""
     comment_data = {"postId": post_id, "name": name, "email": email, "body": body}
     try:
@@ -41,7 +42,7 @@ def create_comment(post_id, name, email, body):
         return None
 
 
-def main():
+def main() -> None:
     user_id = 1
 
     # 1. Recupera tutti i post pubblicati dall'utente con ID = 1

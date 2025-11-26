@@ -15,7 +15,7 @@ def get_todos_by_user(user_id: int) -> Optional[list]:
         return None
 
 
-def update_todo(todo_id, updated_data):
+def update_todo(todo_id: int, updated_data: dict) -> Optional[dict]:
     """Aggiorna un todo specifico con una richiesta PUT."""
     try:
         response = requests.put(
@@ -28,7 +28,7 @@ def update_todo(todo_id, updated_data):
         return None
 
 
-def main():
+def main() -> None:
     user_id: int = 1
 
     # 1. Recupera tutti i todos dell'utente con ID = 1
