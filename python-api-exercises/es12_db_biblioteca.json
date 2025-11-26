@@ -1,0 +1,19 @@
+{
+  "authors": [
+    { "id": 1, "name": "Daniele Pennac", "country": "France" },
+    { "id": 2, "name": "Stephen King", "country": "USA" },
+    { "id": 3, "name": "J.K. Rowling", "country": "UK" }
+  ],
+  "genres": [
+    { "id": 101, "name": "Fantasy" },
+    { "id": 102, "name": "Horror" },
+    { "id": 103, "name": "Adventure" }
+  ],
+  "books": [
+    { "id": 1001, "author_id": 1, "genre_id": 101, "title": "La Storia Infinita", "pages": 400, "available": true },
+    { "id": 1002, "author_id": 1, "genre_id": 101, "title": "Il Giuramento dei Tre", "pages": 350, "available": false },
+    { "id": 1003, "author_id": 2, "genre_id": 102, "title": "It", "pages": 1100, "available": true },
+    { "id": 1004, "author_id": 2, "genre_id": 102, "title": "The Shining", "pages": 450, "available": true },
+    { "id": 1005, "author_id": 3, "genre_id": 101, "title": "Harry Potter e la Pietra Filosofale", "pages": 310, "available": false }
+  ]
+}
