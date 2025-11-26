@@ -1,7 +1,8 @@
 import requests
+from typing import Optional
 
 
-def get_todos_by_user(user_id: int) -> list[dict[int, int, str, bool]] | None:
+def get_todos_by_user(user_id: int) -> Optional[list]:
     """Recupera tutti i todos pubblicati dall'utente con l'ID specificato."""
     try:
         response = requests.get(
@@ -31,9 +32,7 @@ def main():
     user_id: int = 1
 
     # 1. Recupera tutti i todos dell'utente con ID = 1
-    lista_delle_cose_da_fare: list[dict[int, int, str, bool]] = get_todos_by_user(
-        user_id
-    )
+    lista_delle_cose_da_fare: Optional[list] = get_todos_by_user(user_id)
     if lista_delle_cose_da_fare is None:
         return
 
@@ -50,9 +49,11 @@ def main():
     print(f"Incompleti: {incomplete_todos}")
 
     # 2. Trova il primo todo incompleto
-    first_incomplete = next(
-        (todo for todo in lista_delle_cose_da_fare if not todo["completed"]), None
-    )
+    first_incomplete = None
+    for todo in lista_delle_cose_da_fare:
+        if not todo["completed"]:
+            first_incomplete = todo
+            break
 
     if first_incomplete is None:
         print("\nNessun todo incompleto trovato.")
@@ -68,12 +69,9 @@ def main():
     if updated_todo is None:
         return
 
-    # Merge the updated data with the original todo
-    updated_todo = {**first_incomplete, **updated_todo}
-
     print("\n--- Todo aggiornato ---")
     print(
-        f"ID: {updated_todo['id']}, Titolo: {updated_todo['title']}, Completato: {updated_todo['completed']}"
+        f"ID: {updated_todo['id']}, Titolo: {first_incomplete['title']}, Completato: {updated_todo['completed']}"
     )
 
 
