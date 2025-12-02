@@ -1,0 +1,29 @@
+---
+title: ER Diagram for Biblioteca Database
+---
+erDiagram
+    direction TB
+    AUTHORS ||--o{ BOOKS : "writes"
+    AUTHORS {
+        int id PK
+        string name
+        string country
+    }
+    GENRES {
+        int id PK
+        string name
+    }
+    BOOKS {
+        int id PK
+        int author_id FK
+        int genre_id FK
+        string title
+        int pages
+        bool available
+    }
+
+    GENRES-BOOKS {
+        int genre_id FK
+        int book_id FK
+    }
+    GENRES }o--o{ BOOKS : "categorizes"
