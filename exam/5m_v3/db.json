@@ -1,0 +1,17 @@
+{
+  "developers": [
+    { "id": 1, "username": "dev_mario", "role": "senior_backend" },
+    { "id": 2, "username": "dev_luigi", "role": "junior_frontend" }
+  ],
+  "projects": [
+    { "id": 101, "dev_id": 1, "name": "E-commerce API", "status": "active", "budget": 5000 },
+    { "id": 102, "dev_id": 1, "name": "Legacy System", "status": "completed", "budget": 2000 },
+    { "id": 103, "dev_id": 2, "name": "Landing Page", "status": "active", "budget": 800 }
+  ],
+  "tasks": [
+    { "id": 501, "project_id": 101, "description": "Setup Database", "is_done": true, "hours_estimated": 4 },
+    { "id": 502, "project_id": 101, "description": "Create Auth Endpoints", "is_done": false, "hours_estimated": 8 },
+    { "id": 503, "project_id": 102, "description": "Fix login bug", "is_done": true, "hours_estimated": 2 },
+    { "id": 504, "project_id": 103, "description": "CSS Styling", "is_done": false, "hours_estimated": 5 }
+  ]
+}
