@@ -1,15 +1,26 @@
-# App Flask
+# App Flask per Video e Canali
 
-Fare un app Flask "simile" a Youtube:
-ci sono i Canali e i Video.
-Canali: nome, numero_iscritti, categoria
-Video: nome, durata, immagine*
-Un canale ha piu video, un video appartiene ad un determinato canale.
-L'app deve permettere di creare nuovi canali ed inserire video nel canale.
-Non e' richiesta la modifica o la cancellazione dei contenuti.
+Implementa un'applicazione Flask simile a YouTube con Canali e Video.
+
+## Descrizione delle Entità
+
+- **Canali**: nome, numero_iscritti, categoria
+- **Video**: titolo, durata (in secondi), immagine (URL o nome file)
+
+Relazione: Un canale può avere più video, ogni video appartiene a un canale specifico.
+
+## Funzionalità Richieste
+
 L'app deve permettere di:
-- visualizzare la lista dei canali
-- visualizzare la lista dei video di un canale
+
+1. Creare nuovi canali
+2. Inserire video in un canale
+3. Visualizzare la lista dei canali
+4. Visualizzare la lista dei video di un canale
+
+Non è richiesta la modifica o la cancellazione dei contenuti.
+
+## Schema del Database
 
 ```sql
 DROP TABLE IF EXISTS video;
