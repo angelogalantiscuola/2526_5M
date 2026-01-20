@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Crea Nuovo Video</h1>
+<form method="post">
+    <label for="canale_id">Canale</label>
+    <select name="canale_id" id="canale_id" required>
+        <option value="">Seleziona un canale</option>
+        {% for channel in channels %}
+        <option value="{{ channel['id'] }}">{{ channel['nome'] }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="titolo">Titolo del Video</label>
+    <input name="titolo" id="titolo" required>
+
+    <label for="durata">Durata (secondi)</label>
+    <input name="durata" id="durata" type="number" required>
+
+    <label for="immagine">Immagine (URL)</label>
+    <input name="immagine" id="immagine">
+
+    <input type="submit" value="Crea Video">
+</form>
+{% endblock %}

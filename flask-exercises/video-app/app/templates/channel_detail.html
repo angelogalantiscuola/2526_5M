@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Canale: {{ channel['nome'] }}</h1>
+<p>Categoria: {{ channel['categoria'] }} - Iscritti: {{ channel['numero_iscritti'] }}</p>
+
+<h2>Video</h2>
+{% for video in videos %}
+<article>
+    <header>
+        <h3>{{ video['titolo'] }}</h3>
+        <small>Durata: {{ video['durata'] }} secondi</small>
+        {% if video['immagine'] %}
+        <br><img src="{{ video['immagine'] }}" alt="Anteprima" style="max-width: 200px;">
+        {% endif %}
+    </header>
+</article>
+<hr>
+{% endfor %}
+
+<a href="{{ url_for('main.index') }}">Torna ai canali</a>
+{% endblock %}

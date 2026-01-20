@@ -1,0 +1,55 @@
+<!-- app/templates/base.html -->
+<!doctype html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Video App{% endblock %}</title>
+    <!-- Qui potremmo linkare un CSS -->
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        nav a {
+            margin-right: 10px;
+            text-decoration: none;
+            color: blue;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="{{ url_for('main.index') }}">Video App</a>
+        <a href="{{ url_for('main.create_channel') }}">Crea Canale</a>
+        <a href="{{ url_for('main.create_video') }}">Crea Video</a>
+    </nav>
+    <hr>
+
+    <!-- Zona Messaggi Flash -->
+    {% for message in get_flashed_messages() %}
+    <div class="flash" style="color: red; border: 1px solid red; padding: 10px;">
+        {{ message }}
+    </div>
+    {% endfor %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <hr>
+    <footer>
+        <small>&copy; 2024 - Video App</small>
+    </footer>
+</body>
+
+</html>

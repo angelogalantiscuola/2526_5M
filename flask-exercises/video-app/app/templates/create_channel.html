@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Crea Nuovo Canale</h1>
+<form method="post">
+    <label for="nome">Nome del Canale</label>
+    <input name="nome" id="nome" required>
+
+    <label for="categoria">Categoria</label>
+    <input name="categoria" id="categoria" required>
+
+    <label for="numero_iscritti">Numero Iscritti</label>
+    <input name="numero_iscritti" id="numero_iscritti" type="number" value="0">
+
+    <input type="submit" value="Crea Canale">
+</form>
+{% endblock %}
