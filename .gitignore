@@ -2,3 +2,4 @@
 # File delle soluzioni degli esercizi
 _temp/
 *.pyc
+**/5m_v4/*
