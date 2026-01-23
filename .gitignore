@@ -1,3 +1,4 @@
 .venv/
 # File delle soluzioni degli esercizi
 _temp/
+*.pyc

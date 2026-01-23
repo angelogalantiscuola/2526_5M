@@ -7,8 +7,9 @@ def get_all_channels():
     """
     db = get_db()
     query = """
-        SELECT id, nome, numero_iscritti, categoria
+        SELECT canali.id, canali.nome, canali.numero_iscritti, categoria.nome AS categoria
         FROM canali
+        JOIN categoria ON canali.categoria_id = categoria.id
         ORDER BY numero_iscritti DESC
     """
     channels = db.execute(query).fetchall()
