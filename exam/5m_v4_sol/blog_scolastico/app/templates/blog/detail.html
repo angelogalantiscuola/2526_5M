@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<article class="post">
+  <header>
+    <h1>{{ post['title'] }}</h1>
+    <div class="about">di <strong>{{ post['username'] }}</strong> il {{ post['created'].strftime('%d.%m.%Y') }}</div>
+  </header>
+  <p>{{ post['body'] }}</p>
+  
+  {% if g.user and g.user['id'] == post['author_id'] %}
+    <a class="action" href="{{ url_for('main.update', id=post['id']) }}">Modifica</a>
+    <form action="{{ url_for('main.delete', id=post['id']) }}" method="post" style="display:inline;">
+      <input type="submit" value="Elimina" onclick="return confirm('Sei sicuro?')">
+    </form>
+  {% endif %}
+  
+  <a href="{{ url_for('main.index') }}">← Torna alla home</a>
+</article>
+
+<section class="comments">
+  <h2>Commenti ({{ comments|length }})</h2>
+  
+  {% for comment in comments %}
+    <article class="comment">
+      <header>
+        <strong>{{ comment['username'] }}</strong> il {{ comment['created'].strftime('%d.%m.%Y %H:%M') }}
+      </header>
+      <p>{{ comment['body'] }}</p>
+    </article>
+  {% endfor %}
+  
+  {% if g.user %}
+    <form method="post" action="{{ url_for('main.add_comment', id=post['id']) }}">
+      <textarea name="body" rows="3" placeholder="Scrivi un commento..." required></textarea>
+      <input type="submit" value="Commenta">
+    </form>
+  {% else %}
+    <p><a href="{{ url_for('auth.login') }}">Accedi</a> per commentare.</p>
+  {% endif %}
+</section>
+
+<style>
+  .comment {
+    border-left: 3px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+  }
+  .comments {
+    margin-top: 30px;
+  }
+</style>
+{% endblock %}

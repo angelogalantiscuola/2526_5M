@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Ricerca Post</h1>
+
+<form method="post" style="margin-bottom: 20px;">
+  <input type="text" name="search_term" placeholder="Cerca nel titolo..." value="{{ search_term }}" required>
+  <input type="submit" value="Cerca">
+</form>
+
+{% if search_term %}
+  {% if posts %}
+    <p>Risultati per "<strong>{{ search_term }}</strong>": {{ posts|length }} post trovato/i</p>
+    {% for post in posts %}
+      <article class="post">
+        <header>
+          <h2><a href="{{ url_for('main.post_detail', id=post['id']) }}">{{ post['title'] }}</a></h2>
+          <div class="about">di <strong>{{ post['username'] }}</strong> il {{ post['created'].strftime('%d.%m.%Y') }}</div>
+        </header>
+        <p>{{ post['body'][:100] }}...</p>
+        <a href="{{ url_for('main.post_detail', id=post['id']) }}">Leggi tutto →</a>
+      </article>
+    {% endfor %}
+  {% else %}
+    <p>Nessun risultato trovato per "<strong>{{ search_term }}</strong>".</p>
+  {% endif %}
+{% else %}
+  <p>Usa il modulo sopra per cercare post.</p>
+{% endif %}
+
+<a href="{{ url_for('main.index') }}">← Torna alla home</a>
+
+<style>
+  .post {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #ddd;
+  }
+</style>
+{% endblock %}

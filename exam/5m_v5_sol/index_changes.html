@@ -1,0 +1,37 @@
+<!-- 
+MODIFICA index.html: 
+Aggiungi il bottone preferiti dentro il loop {% for post in posts %}
+Dopo il bottone "Modifica" e prima della chiusura </article>
+-->
+
+<!-- AGGIUNGI QUESTO BLOCCO dopo il link Modifica: -->
+
+{% if g.user %}
+<form method="post" action="{{ url_for('main.toggle_bookmark', id=post['id']) }}" style="display:inline;">
+    {% if post['id'] in bookmarked_ids %}
+    <button type="submit">★ Salvato</button>
+    {% else %}
+    <button type="submit">☆ Salva</button>
+    {% endif %}
+</form>
+{% endif %}
+
+
+<!--
+NOTA: Per far funzionare questo, devi anche modificare la route index() in main.py
+per passare la lista degli ID dei post salvati dall'utente corrente.
+
+Modifica la funzione index() così:
+
+@bp.route('/')
+def index():
+    posts = post_repository.get_all_posts()
+    
+    # Recupera gli ID dei post salvati dall'utente (se loggato)
+    bookmarked_ids = []
+    if g.user:
+        bookmarks = bookmark_repository.get_user_bookmarks(g.user['id'])
+        bookmarked_ids = [b['id'] for b in bookmarks]
+    
+    return render_template('index.html', posts=posts, bookmarked_ids=bookmarked_ids)
+-->

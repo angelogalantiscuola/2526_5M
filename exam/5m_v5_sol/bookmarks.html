@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>I miei Preferiti</h1>
+
+{% if bookmarks %}
+{% for post in bookmarks %}
+<article>
+    <header>
+        <h2>{{ post['title'] }}</h2>
+        <small>
+            Di <strong>{{ post['username'] }}</strong>
+            il {{ post['created'].strftime('%Y-%m-%d') }}
+            - Salvato il {{ post['bookmarked_at'].strftime('%Y-%m-%d') }}
+        </small>
+    </header>
+    <p>{{ post['body'][:150] }}...</p>
+
+    <!-- Bottone per rimuovere -->
+    <form method="post" action="{{ url_for('main.toggle_bookmark', id=post['id']) }}" style="display:inline;">
+        <button type="submit">Rimuovi dai preferiti</button>
+    </form>
+</article>
+<hr>
+{% endfor %}
+{% else %}
+<p>Non hai ancora salvato nessun post.</p>
+{% endif %}
+
+<a href="{{ url_for('main.index') }}">← Torna alla home</a>
+{% endblock %}

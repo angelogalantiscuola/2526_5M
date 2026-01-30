@@ -2,6 +2,5 @@
 # File delle soluzioni degli esercizi
 _temp/
 *.pyc
-**/5m_v4_sol/*
-**/5m_v5/*
-**/5m_v5_sol/*
+repomix*
+_corr*/
