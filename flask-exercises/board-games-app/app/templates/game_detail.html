@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Gioco: {{ game['nome'] }}</h1>
+<p>Categoria: {{ game['categoria'] }} - Giocatori max: {{ game['numero_giocatori_massimo'] }} - Durata media: {{ game['durata_media'] }} minuti</p>
+
+<h2>Partite</h2>
+{% for match in matches %}
+<article>
+    <header>
+        <h3>Data: {{ match['data'] }}</h3>
+        <small>Vincitore: {{ match['vincitore'] }} - Punteggio: {{ match['punteggio_vincitore'] }}</small>
+    </header>
+</article>
+<hr>
+{% endfor %}
+
+<a href="{{ url_for('main.index') }}">Torna ai giochi</a>
+{% endblock %}

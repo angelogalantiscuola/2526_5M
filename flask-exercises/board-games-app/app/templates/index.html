@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Giochi Disponibili</h1>
+
+{% for game in games %}
+
+<!-- http://127.0.0.1:5000/game/2 -->
+<article>
+    <header>
+        <h2><a href="{{ url_for('main.game_detail', id=game['id']) }}">{{ game['nome'] }}</a></h2>
+        <small>Categoria: {{ game['categoria'] }} - Giocatori max: {{ game['numero_giocatori_massimo'] }} - Durata: {{ game['durata_media'] }} min</small>
+    </header>
+</article>
+<hr>
+{% endfor %}
+{% endblock %}

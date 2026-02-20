@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Crea Nuova Partita</h1>
+<form method="post">
+    <label for="gioco_id">Gioco</label>
+    <select name="gioco_id" id="gioco_id" required>
+        <option value="">Seleziona un gioco</option>
+        {% for game in games %}
+        <option value="{{ game['id'] }}">{{ game['nome'] }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="data">Data (YYYY-MM-DD)</label>
+    <input name="data" id="data" type="date" required>
+
+    <label for="vincitore">Vincitore</label>
+    <input name="vincitore" id="vincitore" required>
+
+    <label for="punteggio_vincitore">Punteggio Vincitore</label>
+    <input name="punteggio_vincitore" id="punteggio_vincitore" type="number" min="0" required>
+
+    <input type="submit" value="Crea Partita">
+</form>
+{% endblock %}
