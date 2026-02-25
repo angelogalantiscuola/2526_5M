@@ -6,8 +6,13 @@
     <label for="nome">Nome del Canale</label>
     <input name="nome" id="nome" required>
 
-    <label for="categoria">Categoria</label>
-    <input name="categoria" id="categoria" required>
+    <label for="categoria_id">Categoria</label>
+    <select name="categoria_id" id="categoria_id" required>
+        <option value="">Seleziona una categoria</option>
+        {% for categoria in categorie %}
+        <option value="{{ categoria['id'] }}">{{ categoria['nome'] }}</option>
+        {% endfor %}
+    </select>
 
     <label for="numero_iscritti">Numero Iscritti</label>
     <input name="numero_iscritti" id="numero_iscritti" type="number" value="0">

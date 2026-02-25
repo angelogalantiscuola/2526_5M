@@ -2,6 +2,7 @@ from flask import Blueprint, flash, redirect, render_template, request, url_for
 from werkzeug.exceptions import abort
 from app.repositories import channel_repository, video_repository, category_repository
 
+ 
 # Usiamo 'main' perché è il blueprint principale del sito
 bp = Blueprint("main", __name__)
 
@@ -35,22 +36,25 @@ def create_channel():
     if request.method == "POST":
         nome = request.form["nome"]
         numero_iscritti = request.form.get("numero_iscritti", 0, type=int)
-        categoria = request.form["categoria"]
+        categoria_id = request.form["categoria_id"]
         error = None
 
         if not nome:
             error = "Il nome è obbligatorio."
-        if not categoria:
+        if not categoria_id:
             error = "La categoria è obbligatoria."
 
         if error is not None:
             flash(error)
         else:
             # Creiamo il canale
-            channel_repository.create_channel(nome, numero_iscritti, categoria)
+            channel_repository.create_channel(nome, numero_iscritti, categoria_id)
             return redirect(url_for("main.index"))
 
-    return render_template("create_channel.html")
+    # Per GET, passiamo i canali per il select
+    categorie = category_repository.get_all_categories()
+    return render_template("create_channel.html", categorie=categorie)
+
 
 
 @bp.route("/create_video", methods=("GET", "POST"))

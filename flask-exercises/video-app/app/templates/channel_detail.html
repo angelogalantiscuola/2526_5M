@@ -11,7 +11,8 @@
         <h3>{{ video['titolo'] }}</h3>
         <small>Durata: {{ video['durata'] }} secondi</small>
         {% if video['immagine'] %}
-        <br><img src="{{ video['immagine'] }}" alt="Anteprima" style="max-width: 200px;">
+        <br>
+        <img src="{{ url_for('static', filename=video['immagine']) }}" alt="Anteprima" style="max-width: 200px;">
         {% endif %}
     </header>
 </article>

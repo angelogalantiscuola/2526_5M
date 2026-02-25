@@ -10,3 +10,14 @@ def create_category(nome: str):
     )
     db.commit()
     return cursor.lastrowid
+
+def get_all_categories():
+    """
+    Recupera tutte le categorie.
+    """
+    db = get_db()
+    query = """
+        SELECT * FROM categoria ORDER BY nome
+    """
+    categories = db.execute(query).fetchall()
+    return [dict(category) for category in categories]
