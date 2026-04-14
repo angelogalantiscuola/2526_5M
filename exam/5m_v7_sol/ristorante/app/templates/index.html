@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Categorie Disponibili{% endblock %}
+
+{% block content %}
+<h2>Categorie Disponibili</h2>
+
+{% if categories %}
+{% for category in categories %}
+<div class="card">
+    <a href="{{ url_for('main.categoria_detail', id=category['id']) }}">
+        <h3>{{ category['nome'] }}</h3>
+    </a>
+</div>
+{% endfor %}
+{% else %}
+<p>Nessuna categoria disponibile.</p>
+{% endif %}
+{% endblock %}

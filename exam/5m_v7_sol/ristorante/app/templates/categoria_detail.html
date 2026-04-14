@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}{{ category['nome'] }}{% endblock %}
+
+{% block content %}
+<h2>{{ category['nome'] }}</h2>
+
+{% if piatti %}
+<table>
+    <thead>
+        <tr>
+            <th>Nome Piatto</th>
+            <th>Prezzo (€)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for piatto in piatti %}
+        <tr>
+            <td>{{ piatto['nome'] }}</td>
+            <td>{{ "%.2f"|format(piatto['prezzo']) }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>Nessun piatto in questa categoria.</p>
+{% endif %}
+
+<div class="back-link">
+    <a href="{{ url_for('main.index') }}">← Torna alle categorie</a>
+</div>
+{% endblock %}
