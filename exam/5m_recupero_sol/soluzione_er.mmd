@@ -1,0 +1,49 @@
+erDiagram
+    SEDE {
+        INTEGER id PK
+        TEXT indirizzo
+        TEXT citta
+    }
+
+    LIBRO {
+        INTEGER id PK
+        TEXT titolo
+        INTEGER anno_pubblicazione
+        REAL prezzo_copertina
+    }
+
+    AUTORE {
+        INTEGER id PK
+        TEXT nome
+        TEXT cognome
+    }
+
+    ISCRITTO {
+        INTEGER id PK
+        TEXT nome
+        TEXT cognome
+        TEXT email
+    }
+
+    PRESTITO {
+        INTEGER id PK
+        DATE data_inizio
+        DATE data_restituzione
+        INTEGER iscritto_id FK
+        INTEGER libro_id FK
+        INTEGER sede_id FK
+    }
+
+    EVENTO {
+        INTEGER id PK
+        TEXT titolo
+        DATE data_evento
+        INTEGER sede_id FK
+    }
+
+    %% Relazioni
+    SEDE ||--o{ EVENTO : "ospita"
+    SEDE ||--o{ PRESTITO : "registra"
+    AUTORE }o--o{ LIBRO : "scrive"
+    ISCRITTO ||--o{ PRESTITO : "effettua"
+    LIBRO ||--o{ PRESTITO : "viene_prestato"
